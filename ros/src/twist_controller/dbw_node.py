@@ -88,23 +88,22 @@ class DBWNode(object):
                                                                                    self.dbw_enabled,
                                                                                    self.linear_vel,
                                                                                    self.angular_vel)
-                rospy.loginfo("twist ctrl update")
-                if self.dbw_enabled:
-                    self.publish(self.throttle, self.brake, self.steering)
-
+            rospy.loginfo("twist ctrl update")
+            if self.dbw_enabled:
+                self.publish(self.throttle, self.brake, self.steering)
             rate.sleep()
 
     def dbw_enabled_cb(self, msg):
-        rospy.loginfo("DBW: {}\n".format(msg))
+        # rospy.loginfo("DBW: {}\n".format(msg))
         self.dbw_enabled = msg
 
     def twist_cb(self, msg):
-        rospy.loginfo("TWIST: {}\n".format(msg.twist.linear.x))
+        # rospy.loginfo("TWIST: {}\n".format(msg.twist))
         self.linear_vel = msg.twist.linear.x
         self.angular_vel = msg.twist.angular.z
 
     def velocity_cb(self, msg):
-        rospy.loginfo("VEL: {}\n".format(msg.twist.linear.x))
+        # rospy.loginfo("VEL: {}\n".format(msg.twist.linear.x))
         self.current_vel = msg.twist.linear.x
 
     def publish(self, throttle, brake, steer):
