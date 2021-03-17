@@ -9,11 +9,16 @@
 Running catkin_make, source devel/setup.sh and roslaunch launch/styx.launch within the ros directory results in no errors and allows the program to connect to the simulator.
 
 
-Hints
-```bash
-docker run -p 4567:4567 -v $PWD:/capstone -v /tmp/log:/root/.ros/ --rm -it capstone #run container
-docker exec -it romantic_cannon bash # Connect to running container from other shell, romantic_cannon is a random name given to the container in previous step, probably adding a --name param there would be better.
+Docker hints:
 
+```bash
+docker run -p 4567:4567 -v $PWD:/capstone -v /tmp/log:/root/.ros/ --name nd-capstone --rm -it capstone #run container
+docker exec -it nd-capstone bash # Connect to running container from other shell, romantic_cannon is a random name given to the container in previous step, probably adding a --name param there would be better.
+```
+
+Debugging:
+```
+rostopic echo /final_waypoints
 ```
 
 
