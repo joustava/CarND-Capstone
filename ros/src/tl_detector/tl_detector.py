@@ -51,7 +51,6 @@ class TLDetector(object):
         self.last_wp = -1
         self.state_count = 0
 
-        self.base_waypoints = None
         self.waypoints_2d = None
         self.waypoint_tree = None
 
@@ -61,7 +60,7 @@ class TLDetector(object):
         self.pose = msg
 
     def waypoints_cb(self, waypoints):
-        self.base_waypoints = waypoints
+        self.waypoints = waypoints
         if not self.waypoints_2d:
             self.waypoints_2d = [[waypoint.pose.pose.position.x, waypoint.pose.pose.position.y] for waypoint in waypoints.waypoints]
             self.waypoint_tree = KDTree(self.waypoints_2d)
@@ -113,20 +112,20 @@ class TLDetector(object):
         # x = pose.position.x
         # y = pose.position.y
 
-        self.waypoint_tree.query([x, y], 1)[1]
+        return self.waypoint_tree.query([x, y], 1)[1]
 
-        closest_coord = self.waypoints_2d[closest_idx]
-        prev_coord = self.waypoints_2d[closest_idx - 1]
+        # closest_coord = self.waypoints_2d[closest_idx]
+        # prev_coord = self.waypoints_2d[closest_idx - 1]
 
-        closest_vect = np.array(closest_coord)
-        prev_vect = np.array(prev_coord)
-        pos_vect = np.array([x, y])
+        # closest_vect = np.array(closest_coord)
+        # prev_vect = np.array(prev_coord)
+        # pos_vect = np.array([x, y])
 
-        val = np.dot(closest_vect - prev_vect, pos_vect - closest_vect)
+        # val = np.dot(closest_vect - prev_vect, pos_vect - closest_vect)
 
-        if val > 0:
-            closest_idx = (closest_idx + 1) % len(self.waypoints_2d)
-        return closest_idx
+        # if val > 0:
+        #     closest_idx = (closest_idx + 1) % len(self.waypoints_2d)
+        # return closest_idx
 
     def get_light_state(self, light):
         """Determines the current color of the traffic light
