@@ -3,7 +3,6 @@
 > Capstone project of the Udacity Self-Driving Car Engineer course
 
 
-
 ## Running
 
 Running catkin_make, source devel/setup.sh and roslaunch launch/styx.launch within the ros directory results in no errors and allows the program to connect to the simulator.

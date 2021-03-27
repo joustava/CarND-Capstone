@@ -1,60 +1,57 @@
-This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
+# Capstone: System Integration
 
-Please use **one** of the two installation options, either native **or** docker installation.
+> Capstone Project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car.
 
-### Native Installation
+**This repo is bsed on the Docker setup.**
 
-* Be sure that your workstation is running Ubuntu 16.04 Xenial Xerus or Ubuntu 14.04 Trusty Tahir. [Ubuntu downloads can be found here](https://www.ubuntu.com/download/desktop).
-* If using a Virtual Machine to install Ubuntu, use the following configuration as minimum:
-  * 2 CPU
-  * 2 GB system memory
-  * 25 GB of free hard drive space
+## Docker Installation
 
-  The Udacity provided virtual machine has ROS and Dataspeed DBW already installed, so you can skip the next two steps if you are using this.
-
-* Follow these instructions to install ROS
-  * [ROS Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) if you have Ubuntu 16.04.
-  * [ROS Indigo](http://wiki.ros.org/indigo/Installation/Ubuntu) if you have Ubuntu 14.04.
-* Download the [Udacity Simulator](https://github.com/udacity/CarND-Capstone/releases).
-
-### Docker Installation
 [Install Docker](https://docs.docker.com/engine/installation/)
 
-Build the docker container
+1. Clone this project repository
+```bash
+git clone git@github.com:joustava/CarND-Capstone.git
+```
+
+2. Build the Docker image from the Dockerfile available in the repository
 ```bash
 docker build . -t capstone
 ```
 
-Run the docker file
+3. Start a container based on the previously build image
 ```bash
 docker run -p 4567:4567 -v $PWD:/capstone -v /tmp/log:/root/.ros/ --rm -it capstone
 ```
 
-### Port Forwarding
-To set up port forwarding, please refer to the "uWebSocketIO Starter Guide" found in the classroom (see Extended Kalman Filter Project lesson).
+## Running the project
 
-### Usage
+Within the running container
 
-1. Clone the project repository
-```bash
-git clone https://github.com/udacity/CarND-Capstone.git
-```
-
-2. Install python dependencies
-```bash
-cd CarND-Capstone
-pip install -r requirements.txt
-```
-3. Make and run styx
+1. Change to the catkin workspace
 ```bash
 cd ros
+```
+
+2. Build the workspace
+```bash
 catkin_make
+```
+
+3. Source the scripts
+```bash
 source devel/setup.sh
+```
+
+4. Run the project
+```
 roslaunch launch/styx.launch
 ```
-4. Run the simulator
 
-### Real world testing
+To see the result you need to first download the [simulator](https://github.com/udacity/CarND-Capstone/releases) for your system and unzip the package.
+You probably need to change the permissions e.g: `chmod -R u+x ~/Downloads/mac_sys_int` (path to wherever you unzipped the files). Then you can click the 
+`sys_int` application, it should connect to the ROS application and the car will start acting upon the data it receives.
+
+## Real world testing
 1. Download [training bag](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic_light_bag_file.zip) that was recorded on the Udacity self-driving car.
 2. Unzip the file
 ```bash
